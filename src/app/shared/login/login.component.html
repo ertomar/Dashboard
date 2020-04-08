@@ -1,0 +1,38 @@
+<section id="login-section">
+  <div class="card-holder m-auto">
+    <mat-card id="loginCard">
+      <mat-card-header id="loginCardHeader" class="text-right m-0">
+        <mat-card-title class="text-right m-0"><p>Login</p></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="d-flex flex-column">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="your email"
+              [(ngModel)]="email"
+              type="email"
+              name="email"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="your password"
+              [(ngModel)]="password"
+              type="password"
+              name="password"
+              required
+            />
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="login()" color="primary">
+          Login
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</section>

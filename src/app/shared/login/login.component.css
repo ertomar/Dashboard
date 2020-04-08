@@ -1,0 +1,9 @@
+#loginCardHeader p {
+  margin: 0 0 15px -16px;
+}
+#login-section {
+  margin-top: 120px;
+}
+.card-holder {
+  width: 40% !important;
+}
