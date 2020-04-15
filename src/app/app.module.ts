@@ -25,13 +25,25 @@ import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { AuthGuard } from "./_guard";
 import { UsersService } from "./users.service";
+import { OffersComponent } from "./offers/offers.component";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { OffersService } from "./offers.service";
+import { TableComponent } from "./pages/table/table.component";
+import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
+import { DatePipe } from "@angular/common";
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    MessageComponent
+    MessageComponent,
+    OffersComponent,
+    TableComponent,
+    ConfirmationComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -47,19 +59,26 @@ import { UsersService } from "./users.service";
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
   ],
   providers: [
     CookieService,
     AuthGuard,
+    { provide: MAT_DATE_LOCALE, useValue: "en-GB" },
     UsersService,
+    DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
+      multi: true,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    OffersService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

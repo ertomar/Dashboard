@@ -3,7 +3,7 @@ import {
   OnInit,
   Renderer2,
   ViewChild,
-  ElementRef
+  ElementRef,
 } from "@angular/core";
 import { ROUTES } from "../../sidebar/sidebar.component";
 import { Router } from "@angular/router";
@@ -14,7 +14,7 @@ import { LoginComponent } from "../login/login.component";
 @Component({
   moduleId: module.id,
   selector: "navbar-cmp",
-  templateUrl: "navbar.component.html"
+  templateUrl: "navbar.component.html",
 })
 export class NavbarComponent implements OnInit {
   private listTitles: any[];
@@ -42,10 +42,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.listTitles = ROUTES.filter((listTitle) => listTitle);
     var navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName("navbar-toggle")[0];
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       this.sidebarClose();
     });
   }
@@ -74,7 +74,7 @@ export class NavbarComponent implements OnInit {
     const mainPanel = <HTMLElement>(
       document.getElementsByClassName("main-panel")[0]
     );
-    setTimeout(function() {
+    setTimeout(function () {
       toggleButton.classList.add("toggled");
     }, 500);
 
@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
       document.getElementsByClassName("main-panel")[0]
     );
     if (window.innerWidth < 991) {
-      setTimeout(function() {
+      setTimeout(function () {
         mainPanel.style.position = "";
       }, 500);
     }
@@ -101,7 +101,7 @@ export class NavbarComponent implements OnInit {
   collapse() {
     this.isCollapsed = !this.isCollapsed;
     const navbar = document.getElementsByTagName("nav")[0];
-    console.log(navbar);
+
     if (!this.isCollapsed) {
       navbar.classList.remove("navbar-transparent");
       navbar.classList.add("bg-white");

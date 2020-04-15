@@ -3,7 +3,7 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -19,15 +19,20 @@ export class ErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError(err => {
-        if (err.status === 401 || err.status === 400) {
+      catchError((err) => {
+        console.log(err);
+        if (
+          (err.status === 401 || err.status === 400) &&
+          (err.status.toString().includes("Token") ||
+            err.status.toString().includes("token"))
+        ) {
           // auto logout if 401 response returned from api
           this._LoginService.logout();
+
           location.reload(true);
         }
 
-        const error = err.error.message || err.statusText;
-        return throwError(error);
+        return throwError(err);
       })
     );
   }

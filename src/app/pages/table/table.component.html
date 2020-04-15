@@ -7,32 +7,37 @@
       <div class="card-body">
         <div class="table-responsive">
           <table class="table">
-            <thead class=" text-primary">
-              <th *ngFor="let header of users.headerRow | slice: 1">
+            <thead class="text-primary">
+              <th *ngFor="let header of data.headerRow">
                 {{ header }}
+              </th>
+              <th>
+                Delete
               </th>
             </thead>
             <tbody>
-              <tr *ngFor="let user of users.dataRows">
-                <td>
-                  {{
-                    user.name.constructor.name === "String"
-                      ? user.name
-                      : user.name.first.constructor.name === "String"
-                      ? user.name.first + " " + user.name.last
-                      : "Null"
-                  }}
-                </td>
-                <td>
-                  {{ user.phone }}
-                </td>
-                <td>
-                  {{ user.rate }}
-                </td>
-                <td>
-                  {{ user.balance }}
-                </td>
-              </tr>
+              <ng-container *ngIf="data.dataRows">
+                <tr *ngFor="let user of data.dataRows; let i = index">
+                  <td *ngFor="let key of data.keys">
+                    {{
+                      key === "end"
+                        ? (user[key] | date: "dd/MM/yyyy")
+                        : key === "start"
+                        ? (user[key] | date: "dd/MM/yyyy")
+                        : user[key]
+                    }}
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger"
+                      id="{{ 'offer' + i }}"
+                      (click)="deleteClick(i)"
+                    >
+                      delete
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
             </tbody>
           </table>
         </div>

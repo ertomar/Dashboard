@@ -1,0 +1,274 @@
+<mat-tab-group>
+  <mat-tab label="Add">
+    <div class="container mt-4">
+      <div [hidden]="submitted">
+        <h1>Add an offer</h1>
+        <form (ngSubmit)="onSubmit()" #offerFrom="ngForm">
+          <div class="form-group">
+            <label for="name">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              required
+              [(ngModel)]="offer.title"
+              name="title"
+              #title="ngModel"
+              minlength="4"
+              maxlength="64"
+              pattern="[^\s]*"
+            />
+            <div
+              [hidden]="title.valid || title.pristine"
+              class="alert alert-danger"
+            >
+              -must be between 4 and 64 characters.
+              <br />
+              -You can't use white spaces.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="code">Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              required
+              [(ngModel)]="offer.code"
+              name="code"
+              #code="ngModel"
+              minlength="4"
+              maxlength="64"
+              pattern="[^\s]*"
+            />
+            <div
+              [hidden]="code.valid || code.pristine"
+              class="alert alert-danger"
+            >
+              -must be between 4 and 64 characters.
+              <br />
+              -You can't use white spaces.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <div>
+              <mat-form-field class="border-0">
+                <mat-label class="ml-2">Choose a date</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  [matDatepicker]="startPicker"
+                  required
+                  [(ngModel)]="offer.start"
+                  name="start"
+                  #start="ngModel"
+                  [min]="minDate"
+                  [max]="maxDate"
+                  class="pl-1"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="startPicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker
+                  #startPicker
+                  [startAt]="startDate"
+                ></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div
+              [hidden]="start.valid || start.pristine"
+              class="alert alert-danger"
+            >
+              -Start date should not be an old date.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date</label>
+            <div>
+              <mat-form-field class="border-0">
+                <mat-label class="ml-2">Choose a date</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  [matDatepicker]="endPicker"
+                  required
+                  [(ngModel)]="offer.end"
+                  name="end"
+                  #end="ngModel"
+                  [min]="minDate"
+                  [max]="maxDate"
+                  class="pl-1"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="endPicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #endPicker [startAt]="endDate"></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div
+              [hidden]="start.valid || start.pristine"
+              class="alert alert-danger"
+            >
+              -End date should not be an old date.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="offerType">Offer type</label>
+            <select
+              class="form-control"
+              id="offerType"
+              required
+              [(ngModel)]="offer.offerType"
+              name="offerType"
+              #offerType="ngModel"
+            >
+              <option *ngFor="let type of offerTypes" [value]="type">{{
+                type
+              }}</option>
+            </select>
+            <div
+              [hidden]="offerType.valid || offerType.pristine"
+              class="alert alert-danger"
+            >
+              Offer type is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="value">Value</label>
+            <input
+              type="number"
+              class="form-control"
+              id="value"
+              required
+              [(ngModel)]="offer.value"
+              name="value"
+              #value="ngModel"
+              min="0"
+              oninput="this.value = Math.abs(this.value)"
+            />
+            <div
+              [hidden]="value.valid || value.pristine"
+              class="alert alert-danger"
+            >
+              -must be higher than 0.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="name">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              required
+              [(ngModel)]="offer.description"
+              name="description"
+              #description="ngModel"
+              minlength="10"
+              maxlength="300"
+            />
+            <div
+              [hidden]="description.valid || description.pristine"
+              class="alert alert-danger"
+            >
+              -must be between 10 and 300 characters.
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!offerFrom.form.valid"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            class="btn btn-default"
+            (click)="newHero(); offerFrom.reset()"
+          >
+            Clear
+          </button>
+        </form>
+      </div>
+
+      <div [hidden]="!submitted">
+        <h2>You submitted the following:</h2>
+        <div class="d-flex flex-column">
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1">Title:</div>
+            <div class="col-xs-9">{{ offer.title }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1">Code:</div>
+            <div class="col-xs-9">{{ offer.code }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1">Start Date:</div>
+            <div class="col-xs-9">{{ offer.start | date: "dd/MM/yyyy" }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1">End Date:</div>
+            <div class="col-xs-9">{{ offer.end | date: "dd/MM/yyyy" }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1">Offer type:</div>
+            <div class="col-xs-9">{{ offer.offerType }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1">Value:</div>
+            <div class="col-xs-9">{{ offer.value }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1">Description:</div>
+            <div class="col-xs-9">{{ offer.description }}</div>
+          </div>
+
+          <br />
+          <div
+            class="d-flex flex-row justify-content-center align-items-center align-content-center"
+          >
+            <button class="btn btn-primary" (click)="confirm()">
+              Confirm
+            </button>
+            <button class="btn btn-default" (click)="submitted = false">
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Past offers">
+    <mat-tab-group>
+      <mat-tab label="All">
+        <div class="container mt-4">
+          <table-cmp
+            *ngIf="pastOffers"
+            [data]="pastOffers"
+            (clicked)="deleteClicked($event)"
+          ></table-cmp></div
+      ></mat-tab>
+      <mat-tab label="Active">
+        <div class="container mt-4">
+          <table-cmp
+            *ngIf="activeOffers"
+            [data]="activeOffers"
+            (clicked)="deleteClicked($event)"
+          ></table-cmp></div
+      ></mat-tab>
+      <mat-tab label="Expired">
+        <div class="container mt-4">
+          <table-cmp
+            *ngIf="expiredOffers"
+            [data]="expiredOffers"
+            (clicked)="deleteClicked($event)"
+          ></table-cmp></div
+      ></mat-tab>
+    </mat-tab-group>
+  </mat-tab>
+</mat-tab-group>
