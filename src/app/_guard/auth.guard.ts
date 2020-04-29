@@ -3,10 +3,10 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  Router
+  Router,
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { LoginService } from "app/login.service";
+import { LoginService } from "app/services/login.service";
 import { CookieService } from "ngx-cookie-service";
 
 @Injectable()

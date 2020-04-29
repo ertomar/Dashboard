@@ -37,7 +37,7 @@
     "core-js": "3.6.4",
     "express": "4.17.1",
     "jquery": "3.4.1",
-    "moment": "2.24.0",
+    "moment": "^2.24.0",
     "ngx-cookie-service": "^3.0.3",
     "ngx-toastr": "10.0.4",
     "rxjs": "6.5.4",

@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">Passengers</h4>
+        <h4 class="card-title">{{ data.title }}</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -12,28 +12,30 @@
                 {{ header }}
               </th>
               <th>
-                Delete
+                {{ data.buttonName }}
               </th>
             </thead>
             <tbody>
               <ng-container *ngIf="data.dataRows">
-                <tr *ngFor="let user of data.dataRows; let i = index">
+                <tr *ngFor="let item of data.dataRows; let i = index">
                   <td *ngFor="let key of data.keys">
                     {{
                       key === "end"
-                        ? (user[key] | date: "dd/MM/yyyy")
+                        ? (item[key] | date: "dd/MM/yyyy")
                         : key === "start"
-                        ? (user[key] | date: "dd/MM/yyyy")
-                        : user[key]
+                        ? (item[key] | date: "dd/MM/yyyy")
+                        : key === "date"
+                        ? (item[key] | date: "dd/MM/yyyy")
+                        : item[key]
                     }}
                   </td>
                   <td>
                     <button
                       class="btn btn-danger"
                       id="{{ 'offer' + i }}"
-                      (click)="deleteClick(i)"
+                      (click)="buttonClick(i)"
                     >
-                      delete
+                      {{ data.buttonName }}
                     </button>
                   </td>
                 </tr>

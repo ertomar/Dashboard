@@ -24,16 +24,18 @@ import { FormsModule } from "@angular/forms";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { AuthGuard } from "./_guard";
-import { UsersService } from "./users.service";
-import { OffersComponent } from "./offers/offers.component";
+import { PassengersService } from "./services/passengers.service";
+import { OffersComponent } from "./pages/offers/offers.component";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
-import { OffersService } from "./offers.service";
+import { OffersService } from "./services/offers.service";
 import { TableComponent } from "./pages/table/table.component";
 import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
 import { DatePipe } from "@angular/common";
+import { ComplaintsComponent } from "./pages/complaints/complaints.component";
+import { ComplaintDetailsComponent } from './pages/complaint-details/complaint-details.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { DatePipe } from "@angular/common";
     OffersComponent,
     TableComponent,
     ConfirmationComponent,
+    ComplaintsComponent,
+    ComplaintDetailsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -69,7 +73,7 @@ import { DatePipe } from "@angular/common";
     CookieService,
     AuthGuard,
     { provide: MAT_DATE_LOCALE, useValue: "en-GB" },
-    UsersService,
+    PassengersService,
     DatePipe,
     {
       provide: HTTP_INTERCEPTORS,

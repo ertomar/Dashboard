@@ -1,11 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { KeyValue } from "@angular/common";
-
-declare interface TableData {
-  headerRow: string[];
-  keys: string[];
-  dataRows: any[];
-}
+import { TableData } from "app/interfaces/table-data";
 
 @Component({
   selector: "table-cmp",
@@ -15,7 +9,7 @@ declare interface TableData {
 export class TableComponent implements OnInit {
   @Input() data: TableData;
   @Output() clicked = new EventEmitter<number>();
-  deleteClick(index: number) {
+  buttonClick(index: number) {
     this.clicked.emit(index);
   }
   ngOnInit() {}

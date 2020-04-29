@@ -1,15 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Offer } from "../offer";
-import { OffersService } from "app/offers.service";
+import { Offer } from "../../classes/offer";
+import { OffersService } from "app/services/offers.service";
 import { MessageComponent } from "app/shared/message/message.component";
 import { MatDialog } from "@angular/material/dialog";
-import { UsersService } from "app/users.service";
-
-declare interface TableData {
-  headerRow: string[];
-  keys: string[];
-  dataRows: any[];
-}
+import { TableData } from "app/interfaces/table-data";
 
 @Component({
   selector: "app-offers",
@@ -35,8 +29,7 @@ export class OffersComponent implements OnInit {
 
   constructor(
     private _OffersService: OffersService,
-    private dialog: MatDialog,
-    private _UsersService: UsersService
+    private dialog: MatDialog
   ) {
     this.getOffers();
   }
@@ -131,8 +124,11 @@ export class OffersComponent implements OnInit {
         ],
         keys: ["title", "code", "start", "end", "offerType", "value"],
         dataRows: offers,
+        title: "Past Offers",
+        buttonName: "Delete",
       };
       this.activeOffers = Object.assign({}, this.pastOffers);
+      this.activeOffers.title = "Active Offers";
       this.activeOffers.dataRows = this.activeOffers.dataRows.filter(
         (offer) => {
           let today = this.dayZeroing(new Date());
@@ -142,6 +138,7 @@ export class OffersComponent implements OnInit {
       );
 
       this.expiredOffers = Object.assign({}, this.pastOffers);
+      this.expiredOffers.title = "Expired Offers";
       this.expiredOffers.dataRows = this.expiredOffers.dataRows.filter(
         (offer) => {
           let today = this.dayZeroing(new Date());

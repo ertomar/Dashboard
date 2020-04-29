@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ElementRef } from "@angular/core";
 
 export interface RouteInfo {
   path: string;
@@ -18,7 +18,12 @@ export const ROUTES: RouteInfo[] = [
     class: "",
   },
   { path: "/user", title: "Users", icon: "nc-single-02", class: "" },
-  { path: "/users", title: "Users", icon: "nc-tile-56", class: "" },
+  {
+    path: "/complaints",
+    title: "Complaints",
+    icon: "fa fa-comment-o",
+    class: "",
+  },
   {
     path: "/typography",
     title: "Typography",
@@ -37,10 +42,22 @@ export const ROUTES: RouteInfo[] = [
   moduleId: module.id,
   selector: "sidebar-cmp",
   templateUrl: "sidebar.component.html",
+  styleUrls: ["./sidebar.component.css"],
 })
 export class SidebarComponent implements OnInit {
   public menuItems: any[];
+  constructor(private elem: ElementRef) {}
+  removeNcIconsClass() {
+    let elements = this.elem.nativeElement.querySelectorAll(".fa");
+    elements.forEach(function (element, index) {
+      element.classList.remove("nc-icon");
+    });
+  }
+
   ngOnInit() {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
+  }
+  ngAfterViewInit() {
+    this.removeNcIconsClass();
   }
 }

@@ -2,12 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { MessageComponent } from "../message/message.component";
-import { LoginService } from "../../login.service";
+import { LoginService } from "../../services/login.service";
 import { CookieService } from "ngx-cookie-service";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"]
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
   public email: string = "";
@@ -26,14 +26,14 @@ export class LoginComponent implements OnInit {
         if (error.status == 400 || error.status == 404 || error.status == 401) {
           this.dialog.open(MessageComponent, {
             data: {
-              message: error.error
-            }
+              message: error.error,
+            },
           });
         } else {
           this.dialog.open(MessageComponent, {
             data: {
-              message: "Please, try again later."
-            }
+              message: "Please, try again later.",
+            },
           });
         }
         console.clear();
