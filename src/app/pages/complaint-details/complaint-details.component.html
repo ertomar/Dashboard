@@ -1,23 +1,61 @@
-<mat-card class="example-card w-50">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ complaint.code }}</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <img
-    mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
-  />
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz
-      breeds of dog from Japan. A small, agile dog that copes very well with
-      mountainous terrain, the Shiba Inu was originally bred for hunting.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>
+<section id="complaint" class="gradient">
+  <div class="wrapper">
+    <mat-card
+      class="example-card w-50 m-auto complaint-card pt-0 d-flex justify-content-center align-content-center align-items-center flex-column"
+      *ngIf="complaint"
+    >
+      <div class="profile-pic">
+        <img
+          mat-card-image
+          class="m-0 rounded-circle img-fluid w-100 h-100"
+          [src]="imageurl"
+          alt="Driver Photo"
+        />
+      </div>
+      <mat-card-header
+        class="minus-margin d-flex justify-content-center align-content-center align-items-center flex-column"
+      >
+        <mat-card-title class="main-color passenger-name"
+          >{{ complaint._passenger.name.first }}
+          {{ complaint._passenger.name.last }}</mat-card-title
+        >
+        <mat-card-subtitle class="text-center">{{
+          complaint.from_passenger ? "Passenger" : "Driver"
+        }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          {{ complaint.text }}
+        </p>
+      </mat-card-content>
+
+      <div
+        class="container response-container d-flex justify-content-center align-content-center align-items-center flex-column"
+      >
+        <label for="responseTextArea" class="main-color font-weight-bold"
+          >Write your response here:</label
+        >
+
+        <textarea
+          id="responseTextArea"
+          name="responseTextArea"
+          rows="4"
+          cols="50"
+          class="p-2"
+          [(ngModel)]="response"
+        ></textarea>
+      </div>
+      <mat-card-actions>
+        <button
+          class="btn main-btn"
+          mat-button
+          (click)="respondBtnClick()"
+          [disabled]="response == ''"
+        >
+          Respond
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</section>

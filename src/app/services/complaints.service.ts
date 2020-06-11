@@ -7,24 +7,26 @@ import { Observable, BehaviorSubject, Subject } from "rxjs";
 })
 export class ComplaintsService {
   constructor(private _HttpClient: HttpClient) {}
-  public respond(complaintResponse: string): Observable<any> {
+  public respond(id: string, complaintResponse: string): Observable<any> {
+    console.log(id);
+    console.log(complaintResponse);
     return this._HttpClient.post(
-      "http://localhost:3000/api/admin/add-offer",
+      `https://www.clax-egyp.me/api/admin/complaints/respond/${id}`,
       {
-        complaintResponse,
+        response: complaintResponse,
       },
       { responseType: "text" }
     );
   }
   public getComplaints(): Observable<any> {
     let complaints = this._HttpClient.get(
-      "http://localhost:3000/api/admin/complaints"
+      "https://www.clax-egyp.me/api/admin/complaints"
     );
     return complaints;
   }
   public getComplaint(id: string): Observable<any> {
     let complaints = this._HttpClient.get(
-      `http://localhost:3000/api/admin/complaints/${id}`
+      `https://www.clax-egyp.me/api/admin/complaints/${id}`
     );
     return complaints;
   }

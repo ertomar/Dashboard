@@ -37,7 +37,6 @@ export class OffersComponent implements OnInit {
   onSubmit() {
     this.offer.start = this.dayZeroing(this.offer.start);
     this.offer.end = this.dayZeroing(this.offer.end);
-
     this.submitted = true;
   }
   confirm() {

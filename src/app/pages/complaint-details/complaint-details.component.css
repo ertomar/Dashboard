@@ -1,0 +1,37 @@
+#complaint .wrapper {
+  padding-top: 90px;
+}
+
+.minus-margin {
+  margin-top: -35px;
+}
+
+#complaint .complaint-card {
+  border-radius: 15px;
+}
+#complaint .profile-pic {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  position: relative;
+  transform: translateY(-50%);
+  box-shadow: 0px 5px 50px 0px #673ab7, 0px 0px 0px 7px rgba(107, 74, 255, 0.5);
+  border-radius: 50%;
+}
+.passenger-name {
+  font-size: 23px;
+  font-weight: 600;
+}
+#responseTextArea {
+  border-color: #673ab7;
+  border-width: 2px;
+  border-radius: 5px;
+}
+.response-container::before {
+  content: "";
+  width: 75%;
+  height: 2px;
+  background-color: gray;
+  margin-bottom: 20px;
+  font-weight: bold;
+}

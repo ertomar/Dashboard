@@ -35,7 +35,9 @@ import { TableComponent } from "./pages/table/table.component";
 import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
 import { DatePipe } from "@angular/common";
 import { ComplaintsComponent } from "./pages/complaints/complaints.component";
-import { ComplaintDetailsComponent } from './pages/complaint-details/complaint-details.component';
+import { ComplaintDetailsComponent } from "./pages/complaint-details/complaint-details.component";
+import { MailVerficationComponent } from "./pages/mail-verfication/mail-verfication.component";
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { ComplaintDetailsComponent } from './pages/complaint-details/complaint-d
     ConfirmationComponent,
     ComplaintsComponent,
     ComplaintDetailsComponent,
+    MailVerficationComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserAnimationsModule,

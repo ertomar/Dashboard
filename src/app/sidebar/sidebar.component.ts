@@ -8,30 +8,30 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: "/dashboard", title: "Statistics", icon: "nc-bank", class: "" },
-  { path: "/offers", title: "Offers", icon: "nc-diamond", class: "" },
-  { path: "/maps", title: "Maps", icon: "nc-pin-3", class: "" },
+  { path: "dashboard", title: "Statistics", icon: "nc-bank", class: "" },
+  { path: "offers", title: "Offers", icon: "nc-diamond", class: "" },
+  { path: "maps", title: "Maps", icon: "nc-pin-3", class: "" },
   {
-    path: "/notifications",
+    path: "notifications",
     title: "Notifications",
     icon: "nc-bell-55",
     class: "",
   },
-  { path: "/user", title: "Users", icon: "nc-single-02", class: "" },
+  { path: "user", title: "Users", icon: "nc-single-02", class: "" },
   {
-    path: "/complaints",
+    path: "complaints",
     title: "Complaints",
     icon: "fa fa-comment-o",
     class: "",
   },
   {
-    path: "/typography",
+    path: "typography",
     title: "Typography",
     icon: "nc-caps-small",
     class: "",
   },
   {
-    path: "/upgrade",
+    path: "upgrade",
     title: "Upgrade to PRO",
     icon: "nc-spaceship",
     class: "active-pro",

@@ -8,17 +8,17 @@
         <div class="table-responsive">
           <table class="table">
             <thead class="text-primary">
-              <th *ngFor="let header of data.headerRow">
+              <th *ngFor="let header of data.headerRow" class="text-center">
                 {{ header }}
               </th>
-              <th>
+              <th class="text-center">
                 {{ data.buttonName }}
               </th>
             </thead>
             <tbody>
               <ng-container *ngIf="data.dataRows">
                 <tr *ngFor="let item of data.dataRows; let i = index">
-                  <td *ngFor="let key of data.keys">
+                  <td *ngFor="let key of data.keys" class="text-center">
                     {{
                       key === "end"
                         ? (item[key] | date: "dd/MM/yyyy")
@@ -29,9 +29,9 @@
                         : item[key]
                     }}
                   </td>
-                  <td>
+                  <td class="text-center">
                     <button
-                      class="btn btn-danger"
+                      class="btn main-btn"
                       id="{{ 'offer' + i }}"
                       (click)="buttonClick(i)"
                     >

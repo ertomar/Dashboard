@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             },
           });
         }
-        console.clear();
+        //console.clear();
       }
     );
     // if (this.email === "email@email.com" && this.password === "p@ssw0rd") {

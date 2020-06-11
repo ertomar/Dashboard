@@ -20,7 +20,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((err) => {
-        console.log(err);
         if (
           (err.status === 401 || err.status === 400) &&
           (err.status.toString().includes("Token") ||

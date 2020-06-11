@@ -73,7 +73,7 @@
                 ></mat-datepicker-toggle>
                 <mat-datepicker
                   #startPicker
-                  [startAt]="startDate"
+                  [startAt]="minDate"
                 ></mat-datepicker>
               </mat-form-field>
             </div>
@@ -106,7 +106,7 @@
                   matSuffix
                   [for]="endPicker"
                 ></mat-datepicker-toggle>
-                <mat-datepicker #endPicker [startAt]="endDate"></mat-datepicker>
+                <mat-datepicker #endPicker [startAt]="maxDate"></mat-datepicker>
               </mat-form-field>
             </div>
 
@@ -189,7 +189,7 @@
           <button
             type="button"
             class="btn btn-default"
-            (click)="newHero(); offerFrom.reset()"
+            (click)="offerFrom.reset()"
           >
             Clear
           </button>

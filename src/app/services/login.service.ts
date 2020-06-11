@@ -6,10 +6,10 @@ import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class LoginService {
-  redirectUrl = "dashboard";
+  redirectUrl = "administration/dashboard";
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
   get isLoggedIn() {
@@ -24,15 +24,15 @@ export class LoginService {
   public loginUser(email: string, password: string): Observable<any> {
     return this._HttpClient
       .post(
-        "http://localhost:3000/api/admin/login",
+        "https://www.clax-egyp.me/api/admin/login",
         {
           mail: email,
-          pass: password
+          pass: password,
         },
         { responseType: "text" }
       )
       .pipe(
-        map(response => {
+        map((response) => {
           if (response) {
             this._CookieService.set("Token", response);
             this.router.navigate([this.redirectUrl]);

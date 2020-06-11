@@ -1,0 +1,42 @@
+<html>
+  <head> </head>
+  <body>
+    <section id="mailSection" class="w-100" *ngIf="loaded">
+      <div class="thanking-body w-50 m-auto bg-white">
+        <div class="img-container m-auto">
+          <img
+            class="img-fluid w-100"
+            src="{{
+              status === 400
+                ? 'assets/img/multimedia.svg'
+                : 'assets/img/social.svg'
+            }}"
+          />
+        </div>
+        <div class="message-container mt-4">
+          <h2 class="text-center font-weight-bolder">
+            {{
+              status === 200
+                ? "شكرا لتأكيد بريدك الالكتروني"
+                : status === 409
+                ? "لقد تم تفعيل البريد الالكتروني مسبقا"
+                : "من فضلك تأكد من رابط التفعيل"
+            }}
+          </h2>
+          <h3
+            class="text-muted text-center font-weight-bold"
+            *ngIf="status === 200"
+          >
+            .يمكنك الآن تسجيل الدخول
+          </h3>
+          <h3
+            class="text-muted text-center font-weight-bold"
+            *ngIf="status === 409"
+          >
+            شكراً لتأكيد حسابك
+          </h3>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
