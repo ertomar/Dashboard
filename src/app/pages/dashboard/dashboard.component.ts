@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import Chart from "chart.js";
 import { StatisticsService } from "app/services/statistics.service";
 
+interface Array<T> {
+  fill(value: T): Array<T>;
+}
 @Component({
   selector: "dashboard-cmp",
   moduleId: module.id,
@@ -13,15 +16,34 @@ export class DashboardComponent implements OnInit {
   public chartColor;
   public chartEmail;
   public chartHours;
-  public Data;
+  public data = {
+    usersCount: Array<number>(12).fill(0),
+    driversCount: Array<number>(12).fill(0),
+    tripsCount: Array<number>(12).fill(0),
+  };
+
   constructor(private _StatisticsService: StatisticsService) {
     this.getStatistics();
   }
 
+  refreshCharts() {
+    this.chartHours.update();
+    this.chartEmail.update();
+  }
+
   getStatistics() {
-    this._StatisticsService.getStatistics().subscribe((Statistics) => {
-      this.Data = Statistics;
-      console.log(this.Data);
+    this._StatisticsService.getStatistics().subscribe((statistics) => {
+      statistics.usersActivity.usersNumber.forEach((element) => {
+        this.data.usersCount[element.month - 1] = element.count;
+      });
+      statistics.usersActivity.driversNumber.forEach((element) => {
+        this.data.driversCount[element.month - 1] = element.count;
+      });
+      statistics.usersActivity.tripsNumber.forEach((element) => {
+        this.data.tripsCount[element.month - 1] = element.count;
+      });
+
+      this.refreshCharts();
     });
   }
 
@@ -31,7 +53,6 @@ export class DashboardComponent implements OnInit {
     this.ctx = this.canvas.getContext("2d");
     this.chartHours = new Chart(this.ctx, {
       type: "line",
-
       data: {
         labels: [
           "Jan",
@@ -44,34 +65,36 @@ export class DashboardComponent implements OnInit {
           "Aug",
           "Sep",
           "Oct",
+          "Nov",
+          "Dec",
         ],
         datasets: [
           {
-            label: "Hii",
+            label: "Passengers",
             borderColor: "#6bd098",
             backgroundColor: "#6bd098",
             pointRadius: 0,
             pointHoverRadius: 0,
             borderWidth: 3,
-            data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354],
+            data: this.data.usersCount,
           },
           {
-            label: "Hii",
+            label: "Drivers",
             borderColor: "#f17e5d",
             backgroundColor: "#f17e5d",
             pointRadius: 0,
             pointHoverRadius: 0,
             borderWidth: 3,
-            data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 520],
+            data: this.data.driversCount,
           },
           {
-            label: "Hii",
+            label: "Trips",
             borderColor: "#fcc468",
             backgroundColor: "#fcc468",
             pointRadius: 0,
             pointHoverRadius: 0,
             borderWidth: 3,
-            data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484],
+            data: this.data.tripsCount,
           },
         ],
       },
@@ -119,7 +142,6 @@ export class DashboardComponent implements OnInit {
         },
       },
     });
-
     this.canvas = document.getElementById("chartEmail");
     this.ctx = this.canvas.getContext("2d");
     this.chartEmail = new Chart(this.ctx, {
