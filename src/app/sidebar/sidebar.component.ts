@@ -24,18 +24,6 @@ export const ROUTES: RouteInfo[] = [
     icon: "fa fa-comment-o",
     class: "",
   },
-  {
-    path: "typography",
-    title: "Typography",
-    icon: "nc-caps-small",
-    class: "",
-  },
-  {
-    path: "upgrade",
-    title: "Upgrade to PRO",
-    icon: "nc-spaceship",
-    class: "active-pro",
-  },
 ];
 
 @Component({
