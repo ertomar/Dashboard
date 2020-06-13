@@ -13,13 +13,22 @@ export class DashboardComponent implements OnInit {
   public chartColor;
   public chartEmail;
   public chartHours;
+  public Data;
+  constructor(private _StatisticsService: StatisticsService) {
+    this.getStatistics();
+  }
+
+  getStatistics() {
+    this._StatisticsService.getStatistics().subscribe((Statistics) => {
+      this.Data = Statistics;
+      console.log(this.Data);
+    });
+  }
 
   ngOnInit() {
     this.chartColor = "#FFFFFF";
-
     this.canvas = document.getElementById("chartHours");
     this.ctx = this.canvas.getContext("2d");
-
     this.chartHours = new Chart(this.ctx, {
       type: "line",
 
