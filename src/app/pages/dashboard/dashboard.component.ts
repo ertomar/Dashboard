@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { StatisticsService } from "app/services/statistics.service";
 
 
 @Component({
@@ -8,6 +9,7 @@ import Chart from 'chart.js';
     templateUrl: 'dashboard.component.html'
 })
 
+
 export class DashboardComponent implements OnInit{
 
   public canvas : any;
@@ -15,14 +17,41 @@ export class DashboardComponent implements OnInit{
   public chartColor;
   public chartEmail;
   public chartHours;
+  public Data;
+  constructor(
+    private _StatisticsService: StatisticsService,
+    
+    
+  ) {
+    this.getStatistics();
+  }
+  getStatistics(){
+    this._StatisticsService.getStatistics().subscribe((Statistics) => {
+     
+     this.Data=Statistics
+     console.log(this.Data)
 
+    })
+
+   
+    
+  
+  
+  };
+
+
+ 
     ngOnInit(){
       this.chartColor = "#FFFFFF";
 
       this.canvas = document.getElementById("chartHours");
       this.ctx = this.canvas.getContext("2d");
+      
+      
+      
 
       this.chartHours = new Chart(this.ctx, {
+        
         type: 'line',
 
         data: {
@@ -33,7 +62,7 @@ export class DashboardComponent implements OnInit{
               pointRadius: 0,
               pointHoverRadius: 0,
               borderWidth: 3,
-              data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354]
+              data:this.Data.usersActivity.usersNumber
             },
             {
               borderColor: "#f17e5d",
@@ -41,7 +70,7 @@ export class DashboardComponent implements OnInit{
               pointRadius: 0,
               pointHoverRadius: 0,
               borderWidth: 3,
-              data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420]
+              data: this.Data.usersActivity.driversNumber
             },
             {
               borderColor: "#fcc468",
@@ -49,7 +78,7 @@ export class DashboardComponent implements OnInit{
               pointRadius: 0,
               pointHoverRadius: 0,
               borderWidth: 3,
-              data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484]
+              data:this.Data.usersActivity.tripsNumber
             }
           ]
         },
