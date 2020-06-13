@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import Chart from "chart.js";
+import { StatisticsService } from "app/services/statistics.service";
 
 @Component({
   selector: "dashboard-cmp",
