@@ -16,10 +16,14 @@ export class DashboardComponent implements OnInit {
   public chartColor;
   public chartEmail;
   public chartHours;
+  public capacity;
+  public errorsNumber;
+  public totalRevenue=0;
   public data = {
     usersCount: Array<number>(12).fill(0),
     driversCount: Array<number>(12).fill(0),
     tripsCount: Array<number>(12).fill(0),
+    revenueCount: Array<number>(12).fill(0),
   };
 
   constructor(private _StatisticsService: StatisticsService) {
@@ -29,10 +33,12 @@ export class DashboardComponent implements OnInit {
   refreshCharts() {
     this.chartHours.update();
     this.chartEmail.update();
+    
   }
 
   getStatistics() {
     this._StatisticsService.getStatistics().subscribe((statistics) => {
+      console.log(statistics)
       statistics.usersActivity.usersNumber.forEach((element) => {
         this.data.usersCount[element.month - 1] = element.count;
       });
@@ -42,6 +48,20 @@ export class DashboardComponent implements OnInit {
       statistics.usersActivity.tripsNumber.forEach((element) => {
         this.data.tripsCount[element.month - 1] = element.count;
       });
+      this.capacity=statistics.capacity;
+      //number of server errors
+      this.errorsNumber=statistics.errorsNumber;
+     
+      statistics.revenue.forEach((element) => {
+      //revenue statistics for all app
+      this.data.revenueCount[element.month - 1] = element.revenue; 
+      // total revenue of app
+      this.totalRevenue=this.totalRevenue+ element.revenue;
+      this.totalRevenue=Math.round(this.totalRevenue);
+        
+      });
+      
+      
 
       this.refreshCharts();
     });
@@ -209,7 +229,7 @@ export class DashboardComponent implements OnInit {
     var speedCanvas = document.getElementById("speedChart");
 
     var dataFirst = {
-      data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
+      data: this.data.revenueCount,
       fill: false,
       borderColor: "#fbc658",
       backgroundColor: "transparent",
