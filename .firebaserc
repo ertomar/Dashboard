@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "sanguine-theory-273017": {
+      "hosting": {
+        "pd-free-angularcli": [
+          "sanguine-theory-273017"
+        ]
+      }
+    }
+  }
+}

@@ -13,7 +13,9 @@ import { SidebarModule } from "./sidebar/sidebar.module";
 import { FooterModule } from "./shared/footer/footer.module";
 import { NavbarModule } from "./shared/navbar/navbar.module";
 import { FixedPluginModule } from "./shared/fixedplugin/fixedplugin.module";
-
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { environment } from "../environments/environment";
 import { AppComponent } from "./app.component";
 import { AppRoutes } from "./app.routing";
 
@@ -37,7 +39,10 @@ import { DatePipe } from "@angular/common";
 import { ComplaintsComponent } from "./pages/complaints/complaints.component";
 import { ComplaintDetailsComponent } from "./pages/complaint-details/complaint-details.component";
 import { MailVerficationComponent } from "./pages/mail-verfication/mail-verfication.component";
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
+import { MapsComponent } from "./pages/maps/maps.component";
+import { LinesComponent } from "./pages/lines/lines.component";
+import { from } from "rxjs";
 
 @NgModule({
   declarations: [
@@ -52,6 +57,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     ComplaintDetailsComponent,
     MailVerficationComponent,
     ResetPasswordComponent,
+    MapsComponent,
+    LinesComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -72,6 +79,8 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
   ],
   providers: [
     CookieService,

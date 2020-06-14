@@ -8,6 +8,7 @@ import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { UserComponent } from "../../pages/user/user.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NotificationsComponent } from "app/pages/notifications/notifications.component";
 
 @NgModule({
   imports: [
@@ -17,5 +18,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     NgbModule,
   ],
   declarations: [DashboardComponent, UserComponent],
+  providers: [NotificationsComponent],
 })
 export class AdminLayoutModule {}

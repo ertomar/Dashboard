@@ -16,10 +16,12 @@ export class DashboardComponent implements OnInit {
   public chartColor;
   public chartEmail;
   public chartHours;
+  public chartLines;
   public data = {
     usersCount: Array<number>(12).fill(0),
     driversCount: Array<number>(12).fill(0),
     tripsCount: Array<number>(12).fill(0),
+    capacity: 0,
   };
 
   constructor(private _StatisticsService: StatisticsService) {
@@ -42,13 +44,14 @@ export class DashboardComponent implements OnInit {
       statistics.usersActivity.tripsNumber.forEach((element) => {
         this.data.tripsCount[element.month - 1] = element.count;
       });
-
+      this.data.capacity = statistics.capacity;
+      console.log(statistics);
       this.refreshCharts();
     });
   }
 
   ngOnInit() {
-    this.chartColor = "#FFFFFF";
+    //this.chartColor = "#FFFFFF";
     this.canvas = document.getElementById("chartHours");
     this.ctx = this.canvas.getContext("2d");
     this.chartHours = new Chart(this.ctx, {
@@ -206,9 +209,9 @@ export class DashboardComponent implements OnInit {
       },
     });
 
-    var speedCanvas = document.getElementById("speedChart");
+    let speedCanvas = document.getElementById("speedChart");
 
-    var dataFirst = {
+    let dataFirst = {
       data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
       fill: false,
       borderColor: "#fbc658",
@@ -219,7 +222,7 @@ export class DashboardComponent implements OnInit {
       pointBorderWidth: 8,
     };
 
-    var dataSecond = {
+    let dataSecond = {
       data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
       fill: false,
       borderColor: "#51CACF",
@@ -230,7 +233,7 @@ export class DashboardComponent implements OnInit {
       pointBorderWidth: 8,
     };
 
-    var speedData = {
+    let speedData = {
       labels: [
         "Jan",
         "Feb",
@@ -248,14 +251,14 @@ export class DashboardComponent implements OnInit {
       datasets: [dataFirst, dataSecond],
     };
 
-    var chartOptions = {
+    let chartOptions = {
       legend: {
         display: false,
         position: "top",
       },
     };
 
-    var lineChart = new Chart(speedCanvas, {
+    this.chartLines = new Chart(speedCanvas, {
       type: "line",
       hover: false,
       data: speedData,

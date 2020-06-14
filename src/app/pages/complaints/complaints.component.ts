@@ -22,7 +22,6 @@ export class ComplaintsComponent implements OnInit {
 
   getComplaints() {
     this._ComplaintsService.getComplaints().subscribe((complaints) => {
-      console.log(complaints);
       this.complaints = {
         headerRow: ["Code", "Text", "User type", "Trip", "Passenger", "Driver"],
         keys: [

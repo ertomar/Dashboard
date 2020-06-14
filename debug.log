@@ -26,3 +26,9 @@
 [0515/063004.960:ERROR:exception_snapshot_win.cc(98)] thread ID 9748 not found in process
 [0515/063004.960:ERROR:process_info.cc(118)] ReadProcessMemory bool __cdecl crashpad::(anonymous namespace)::ReadStruct(HANDLE, crashpad::WinVMAddress, T *) [T = crashpad::process_types::PEB<crashpad::process_types::internal::Traits64>]: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
 [0515/063004.960:ERROR:process_info.cc(551)] ReadProcessData failed
+[0614/034551.134:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0614/034551.151:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0614/034551.162:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0614/034551.142:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0614/034551.184:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0614/034551.165:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)

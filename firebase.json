@@ -1,0 +1,15 @@
+{
+  "hosting": [
+    {
+      "target": "pd-free-angularcli",
+      "public": "dist",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

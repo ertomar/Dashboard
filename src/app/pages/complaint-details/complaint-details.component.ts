@@ -5,6 +5,7 @@ import { ComplaintsService } from "app/services/complaints.service";
 import { MessageComponent } from "app/shared/message/message.component";
 import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
 import { MatDialog } from "@angular/material/dialog";
+import { NotificationsComponent } from "../notifications/notifications.component";
 
 @Component({
   selector: "app-complaint-details",
@@ -18,7 +19,7 @@ export class ComplaintDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private _ComplaintsService: ComplaintsService,
     private domSanitizer: DomSanitizer,
-    private dialogScreen: MatDialog
+    private notificationComponent: NotificationsComponent
   ) {}
   id: string;
   complaint: any;
@@ -27,11 +28,9 @@ export class ComplaintDetailsComponent implements OnInit {
     if (this.response != "") {
       this._ComplaintsService.respond(this.id, this.response).subscribe(
         (res) => {
-          this.dialogScreen.open(MessageComponent, {
-            data: {
-              message: "Response sent.",
-            },
-          });
+          this.notificationComponent.showNotification(
+            "Response has been sent."
+          );
         },
         (error: any) => {
           if (
@@ -39,17 +38,9 @@ export class ComplaintDetailsComponent implements OnInit {
             error.status == 404 ||
             error.status == 401
           ) {
-            this.dialog.open(MessageComponent, {
-              data: {
-                message: error.error,
-              },
-            });
+            this.notificationComponent.showNotification(error.error);
           } else {
-            this.dialog.open(MessageComponent, {
-              data: {
-                message: "Please, try again later.",
-              },
-            });
+            this.notificationComponent.showNotification(error.error);
           }
           console.clear();
         }

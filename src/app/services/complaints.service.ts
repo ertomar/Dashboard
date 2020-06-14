@@ -8,8 +8,6 @@ import { Observable, BehaviorSubject, Subject } from "rxjs";
 export class ComplaintsService {
   constructor(private _HttpClient: HttpClient) {}
   public respond(id: string, complaintResponse: string): Observable<any> {
-    console.log(id);
-    console.log(complaintResponse);
     return this._HttpClient.post(
       `https://www.clax-egyp.me/api/admin/complaints/respond/${id}`,
       {
