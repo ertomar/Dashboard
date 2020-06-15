@@ -4,6 +4,7 @@ import { OffersService } from "app/services/offers.service";
 import { MessageComponent } from "app/shared/message/message.component";
 import { MatDialog } from "@angular/material/dialog";
 import { TableData } from "app/interfaces/table-data";
+import { NotificationsComponent } from "../notifications/notifications.component";
 
 @Component({
   selector: "app-offers",
@@ -29,7 +30,7 @@ export class OffersComponent implements OnInit {
 
   constructor(
     private _OffersService: OffersService,
-    private dialog: MatDialog
+    private notificationComponent: NotificationsComponent
   ) {
     this.getOffers();
   }
@@ -42,11 +43,7 @@ export class OffersComponent implements OnInit {
   confirm() {
     this._OffersService.addOffer(this.offer).subscribe(
       (response: any) => {
-        this.dialog.open(MessageComponent, {
-          data: {
-            message: "Offer added.",
-          },
-        });
+        this.notificationComponent.showNotification("Offer has been added.");
         this.submitted = false;
         this.newOffer();
         this.getOffers();
@@ -54,17 +51,9 @@ export class OffersComponent implements OnInit {
       },
       (error: any) => {
         if (error.status == 400 || error.status == 404 || error.status == 401) {
-          this.dialog.open(MessageComponent, {
-            data: {
-              message: error.error,
-            },
-          });
+          this.notificationComponent.showNotification(error.error);
         } else {
-          this.dialog.open(MessageComponent, {
-            data: {
-              message: "Please, try again later.",
-            },
-          });
+          this.notificationComponent.showNotification(error.error);
         }
         console.clear();
       }
@@ -93,17 +82,9 @@ export class OffersComponent implements OnInit {
             error.status == 401 ||
             error.status == 404
           ) {
-            this.dialog.open(MessageComponent, {
-              data: {
-                message: error.error,
-              },
-            });
+            this.notificationComponent.showNotification(error.error);
           } else {
-            this.dialog.open(MessageComponent, {
-              data: {
-                message: "Please, try again later.",
-              },
-            });
+            this.notificationComponent.showNotification(error.error);
           }
           console.clear();
         }

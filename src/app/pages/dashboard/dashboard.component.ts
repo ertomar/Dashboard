@@ -17,11 +17,15 @@ export class DashboardComponent implements OnInit {
   public chartEmail;
   public chartHours;
   public chartLines;
+
   public data = {
     usersCount: Array<number>(12).fill(0),
     driversCount: Array<number>(12).fill(0),
     tripsCount: Array<number>(12).fill(0),
+    revenueCount: Array<number>(12).fill(0),
     capacity: 0,
+    errorsNumber: 0,
+    totalRevenue: 0,
   };
 
   constructor(private _StatisticsService: StatisticsService) {
@@ -31,10 +35,12 @@ export class DashboardComponent implements OnInit {
   refreshCharts() {
     this.chartHours.update();
     this.chartEmail.update();
+    this.chartLines.update();
   }
 
   getStatistics() {
     this._StatisticsService.getStatistics().subscribe((statistics) => {
+      console.log(statistics);
       statistics.usersActivity.usersNumber.forEach((element) => {
         this.data.usersCount[element.month - 1] = element.count;
       });
@@ -45,7 +51,17 @@ export class DashboardComponent implements OnInit {
         this.data.tripsCount[element.month - 1] = element.count;
       });
       this.data.capacity = statistics.capacity;
-      console.log(statistics);
+      //number of server errors
+      this.data.errorsNumber = statistics.errorsNumber;
+      this.data.totalRevenue = 0;
+      statistics.revenue.forEach((element) => {
+        //revenue statistics for all app
+        this.data.revenueCount[element.month - 1] = element.revenue;
+        // total revenue of app
+        this.data.totalRevenue = this.data.totalRevenue + element.revenue;
+        this.data.totalRevenue = Math.round(this.data.totalRevenue);
+      });
+
       this.refreshCharts();
     });
   }
@@ -211,8 +227,8 @@ export class DashboardComponent implements OnInit {
 
     let speedCanvas = document.getElementById("speedChart");
 
-    let dataFirst = {
-      data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
+    var dataFirst = {
+      data: this.data.revenueCount,
       fill: false,
       borderColor: "#fbc658",
       backgroundColor: "transparent",
