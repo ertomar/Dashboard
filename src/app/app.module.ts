@@ -40,9 +40,11 @@ import { ComplaintsComponent } from "./pages/complaints/complaints.component";
 import { ComplaintDetailsComponent } from "./pages/complaint-details/complaint-details.component";
 import { MailVerficationComponent } from "./pages/mail-verfication/mail-verfication.component";
 import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
+
 import { MapsComponent } from "./pages/maps/maps.component";
 import { LinesComponent } from "./pages/lines/lines.component";
 import { from } from "rxjs";
+import { NotificationsComponent } from "./pages/notifications/notifications.component";
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { from } from "rxjs";
     ResetPasswordComponent,
     MapsComponent,
     LinesComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -95,6 +98,7 @@ import { from } from "rxjs";
     },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     OffersService,
+    NotificationsComponent,
   ],
   bootstrap: [AppComponent],
 })
