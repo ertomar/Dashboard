@@ -19,7 +19,7 @@
       </div>
       <div class="card-footer">
         <hr />
-        <div class="stats"><i class="fa fa-refresh"></i> Update Now</div>
+        <div class="stats"><i class="fa fa-clock-o"></i>Updated now</div>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
       </div>
       <div class="card-footer">
         <hr />
-        <div class="stats"><i class="fa fa-calendar-o"></i> Last day</div>
+        <div class="stats"><i class="fa fa-clock-o"></i> Updated now</div>
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@
       </div>
       <div class="card-footer">
         <hr />
-        <div class="stats"><i class="fa fa-clock-o"></i> In the last hour</div>
+        <div class="stats"><i class="fa fa-clock-o"></i> Updated now</div>
       </div>
     </div>
   </div>
@@ -77,13 +77,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-favourite-28 text-primary"></i>
+              <i class="nc-icon nc-refresh-69 text-primary"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Followers</p>
-              <p class="card-title">+45K</p>
+              <p class="card-category">Updates</p>
+              <p class="card-title">{{ data.serverUpdates }}</p>
               <p></p>
             </div>
           </div>
@@ -91,7 +91,7 @@
       </div>
       <div class="card-footer">
         <hr />
-        <div class="stats"><i class="fa fa-refresh"></i> Update now</div>
+        <div class="stats"><i class="fa fa-clock-o"></i> Updated now</div>
       </div>
     </div>
   </div>
@@ -108,9 +108,7 @@
       </div>
       <div class="card-footer">
         <hr />
-        <div class="stats">
-          <i class="fa fa-history"></i> Updated 3 minutes ago
-        </div>
+        <div class="stats"><i class="fa fa-history"></i> Updated now</div>
       </div>
     </div>
   </div>
@@ -120,22 +118,28 @@
     <div class="card">
       <div class="card-header">
         <h5 class="card-title">Governs Statistics</h5>
-        <p class="card-category">Last Campaign Performance</p>
+        <p class="card-category">Last Update</p>
       </div>
       <div class="card-body">
         <canvas id="chartEmail"></canvas>
       </div>
       <div class="card-footer">
         <div class="legend">
-          <i class="fa fa-circle"  style="color:#fcc468;"></i> {{this.data.governsNames[1]}}
-          <i class="fa fa-circle " style="color:#4acccd;"></i> {{this.data.governsNames[0]}}
-          <br>
-          <i class="fa fa-circle" style="color:#f1678b;"></i> {{this.data.governsNames[2]}}   
-          <i class="fa fa-circle " style="color:#ef80ff;"></i> {{this.data.governsNames[3]}}
-          <br> 
-          <i class="fa fa-circle" style="color:#fd9d78;"></i> {{this.data.governsNames[4]}} 
-          <i class="fa fa-circle " style="color:#7ffe8b;"></i> {{this.data.governsNames[5]}}
-        </div> 
+          <i class="fa fa-circle" style="color: #fcc468;"></i>
+          {{ this.data.governsNames[1] }}
+          <i class="fa fa-circle" style="color: #4acccd;"></i>
+          {{ this.data.governsNames[0] }}
+          <br />
+          <i class="fa fa-circle" style="color: #f1678b;"></i>
+          {{ this.data.governsNames[2] }}
+          <i class="fa fa-circle" style="color: #ef80ff;"></i>
+          {{ this.data.governsNames[3] }}
+          <br />
+          <i class="fa fa-circle" style="color: #fd9d78;"></i>
+          {{ this.data.governsNames[4] }}
+          <i class="fa fa-circle" style="color: #7ffe8b;"></i>
+          {{ this.data.governsNames[5] }}
+        </div>
         <hr />
         <div class="stats">
           <i class="fa fa-calendar"></i> Number Of Users In Governs
@@ -154,7 +158,7 @@
       </div>
       <div class="card-footer">
         <div class="chart-legend">
-          <i class="fa fa-circle text-info"></i> Tesla Model S
+          <!-- <i class="fa fa-circle text-info"></i> Tesla Model S -->
           <i class="fa fa-circle text-warning"></i> Revenue
         </div>
         <hr />

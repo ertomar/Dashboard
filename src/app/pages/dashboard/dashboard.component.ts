@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
   public chartEmail;
   public chartHours;
   public chartLines;
-  
 
   public data = {
     usersCount: Array<number>(12).fill(0),
@@ -29,7 +28,8 @@ export class DashboardComponent implements OnInit {
     capacity: 0,
     errorsNumber: 0,
     totalRevenue: 0,
-    index:0,
+    index: 0,
+    serverUpdates: 0,
   };
 
   constructor(private _StatisticsService: StatisticsService) {
@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
       this.data.capacity = statistics.capacity;
       //number of server errors
       this.data.errorsNumber = statistics.errorsNumber;
+      this.data.serverUpdates = statistics.updatesNumber;
       this.data.totalRevenue = 0;
       statistics.revenue.forEach((element) => {
         //revenue statistics for all app
@@ -67,21 +68,17 @@ export class DashboardComponent implements OnInit {
       });
 
       //number of users in every governs
-      statistics.usersGoverns.forEach((element) => { 
-        this.data.governsCount[this.data.index]=element.count;
-        this.data.index=this.data.index+1;
-        
+      statistics.usersGoverns.forEach((element) => {
+        this.data.governsCount[this.data.index] = element.count;
+        this.data.index = this.data.index + 1;
       });
-      
-      //names of governs 
-      this.data.index=0;
-      statistics.usersGoverns.forEach((element) => { 
-        this.data.governsNames[this.data.index]=element.govern;
-        this.data.index=this.data.index+1;
-        
-      });
-     
 
+      //names of governs
+      this.data.index = 0;
+      statistics.usersGoverns.forEach((element) => {
+        this.data.governsNames[this.data.index] = element.govern;
+        this.data.index = this.data.index + 1;
+      });
 
       this.refreshCharts();
     });
@@ -187,15 +184,22 @@ export class DashboardComponent implements OnInit {
     this.chartEmail = new Chart(this.ctx, {
       type: "pie",
       data: {
-        labels: [1, 2, 3,4,5,6],
+        labels: [1, 2, 3, 4, 5, 6],
         datasets: [
           {
             label: "Emails",
             pointRadius: 0,
             pointHoverRadius: 0,
-            backgroundColor: ["#4acccd", "#fcc468", "#f1678b", "#ef80ff","#fd9d78","#7ffe8b"],
+            backgroundColor: [
+              "#4acccd",
+              "#fcc468",
+              "#f1678b",
+              "#ef80ff",
+              "#fd9d78",
+              "#7ffe8b",
+            ],
             borderWidth: 0,
-            data:this.data.governsCount,
+            data: this.data.governsCount,
           },
         ],
       },
@@ -259,16 +263,16 @@ export class DashboardComponent implements OnInit {
       pointBorderWidth: 8,
     };
 
-    let dataSecond = {
-      data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
-      fill: false,
-      borderColor: "#51CACF",
-      backgroundColor: "transparent",
-      pointBorderColor: "#51CACF",
-      pointRadius: 4,
-      pointHoverRadius: 4,
-      pointBorderWidth: 8,
-    };
+    // let dataSecond = {
+    //   data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
+    //   fill: false,
+    //   borderColor: "#51CACF",
+    //   backgroundColor: "transparent",
+    //   pointBorderColor: "#51CACF",
+    //   pointRadius: 4,
+    //   pointHoverRadius: 4,
+    //   pointBorderWidth: 8,
+    // };
 
     let speedData = {
       labels: [
@@ -285,7 +289,7 @@ export class DashboardComponent implements OnInit {
         "Nov",
         "Dec",
       ],
-      datasets: [dataFirst, dataSecond],
+      datasets: [dataFirst],
     };
 
     let chartOptions = {
