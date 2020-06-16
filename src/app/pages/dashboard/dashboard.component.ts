@@ -17,15 +17,19 @@ export class DashboardComponent implements OnInit {
   public chartEmail;
   public chartHours;
   public chartLines;
+  
 
   public data = {
     usersCount: Array<number>(12).fill(0),
     driversCount: Array<number>(12).fill(0),
     tripsCount: Array<number>(12).fill(0),
     revenueCount: Array<number>(12).fill(0),
+    governsCount: Array<number>(5).fill(0),
+    governsNames: Array<number>(5).fill(0),
     capacity: 0,
     errorsNumber: 0,
     totalRevenue: 0,
+    index:0,
   };
 
   constructor(private _StatisticsService: StatisticsService) {
@@ -61,6 +65,23 @@ export class DashboardComponent implements OnInit {
         this.data.totalRevenue = this.data.totalRevenue + element.revenue;
         this.data.totalRevenue = Math.round(this.data.totalRevenue);
       });
+
+      //number of users in every governs
+      statistics.usersGoverns.forEach((element) => { 
+        this.data.governsCount[this.data.index]=element.count;
+        this.data.index=this.data.index+1;
+        
+      });
+      
+      //names of governs 
+      this.data.index=0;
+      statistics.usersGoverns.forEach((element) => { 
+        this.data.governsNames[this.data.index]=element.govern;
+        this.data.index=this.data.index+1;
+        
+      });
+     
+
 
       this.refreshCharts();
     });
@@ -166,15 +187,15 @@ export class DashboardComponent implements OnInit {
     this.chartEmail = new Chart(this.ctx, {
       type: "pie",
       data: {
-        labels: [1, 2, 3],
+        labels: [1, 2, 3,4,5,6],
         datasets: [
           {
             label: "Emails",
             pointRadius: 0,
             pointHoverRadius: 0,
-            backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468", "#ef8157"],
+            backgroundColor: ["#4acccd", "#fcc468", "#f1678b", "#ef80ff","#fd9d78","#7ffe8b"],
             borderWidth: 0,
-            data: [342, 480, 530, 120],
+            data:this.data.governsCount,
           },
         ],
       },
