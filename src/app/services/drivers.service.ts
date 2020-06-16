@@ -9,7 +9,7 @@ export class DriversService {
   constructor(private _HttpClient: HttpClient) {}
   public getDriversNames(Ids: any): Observable<any> {
     return this._HttpClient.post(
-      `http://localhost:3000/api/admin/get-drivers`,
+      `https://www.clax-egyp.me/api/admin/get-drivers`,
       {
         driversIds: Ids,
       },
