@@ -1,0 +1,33 @@
+.heroes {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  min-width: 15em;
+  max-width: 20em;
+}
+.heroes li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.3em;
+
+  border-radius: 4px;
+}
+.heroes li:hover {
+  color: #607d8b;
+  background-color: #ddd;
+  left: 0.1em;
+}
+.heroes li.selected {
+  background-color: #673ab7;
+  color: white;
+}
+.heroes li.selected:hover {
+  background-color: #bbd8dc;
+  color: white;
+}
+button {
+  color: #673ab7;
+}

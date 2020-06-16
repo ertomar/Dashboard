@@ -22,7 +22,7 @@ import { AppRoutes } from "./app.routing";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { LoginComponent } from "./shared/login/login.component";
 import { MessageComponent } from "./shared/message/message.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { AuthGuard } from "./_guard";
@@ -40,7 +40,8 @@ import { ComplaintsComponent } from "./pages/complaints/complaints.component";
 import { ComplaintDetailsComponent } from "./pages/complaint-details/complaint-details.component";
 import { MailVerficationComponent } from "./pages/mail-verfication/mail-verfication.component";
 import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
-
+import { MatStepperModule } from "@angular/material/stepper";
+import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 import { MapsComponent } from "./pages/maps/maps.component";
 import { LinesComponent } from "./pages/lines/lines.component";
 import { from } from "rxjs";
@@ -72,6 +73,7 @@ import { NotificationsComponent } from "./pages/notifications/notifications.comp
     FooterModule,
     FixedPluginModule,
     HttpClientModule,
+    MatStepperModule,
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
@@ -82,6 +84,7 @@ import { NotificationsComponent } from "./pages/notifications/notifications.comp
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
   ],
@@ -89,6 +92,10 @@ import { NotificationsComponent } from "./pages/notifications/notifications.comp
     CookieService,
     AuthGuard,
     { provide: MAT_DATE_LOCALE, useValue: "en-GB" },
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
     PassengersService,
     DatePipe,
     {
