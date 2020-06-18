@@ -1,1 +1,5 @@
-<p>lines works!</p>
+<table-cmp
+  *ngIf="linesTable"
+  [data]="linesTable"
+  (clicked)="deleteClicked($event)"
+></table-cmp>

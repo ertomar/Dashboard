@@ -1,10 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ComplaintsService } from "app/services/complaints.service";
-import { MessageComponent } from "app/shared/message/message.component";
 import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
-import { MatDialog } from "@angular/material/dialog";
 import { NotificationsComponent } from "../notifications/notifications.component";
 
 @Component({
@@ -33,21 +30,15 @@ export class ComplaintDetailsComponent implements OnInit {
           );
         },
         (error: any) => {
-          if (
-            error.status == 400 ||
-            error.status == 404 ||
-            error.status == 401
-          ) {
-            this.notificationComponent.showNotification(error.error);
-          } else {
-            this.notificationComponent.showNotification(error.error);
-          }
-          console.clear();
+          this.notificationComponent.showNotification(error.error);
         }
       );
     }
   }
   ngOnInit(): void {
+    this.getComplaint();
+  }
+  getComplaint() {
     this.activatedRoute.params.subscribe((params) => {
       this.id = atob(params["id"]);
       this._ComplaintsService.getComplaint(this.id).subscribe((response) => {

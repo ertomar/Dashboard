@@ -4,4 +4,5 @@ export interface TableData {
   dataRows: any[];
   title: string;
   buttonName: string;
+  searchField: string;
 }

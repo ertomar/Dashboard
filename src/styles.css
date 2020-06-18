@@ -2,3 +2,6 @@
 .mat-header-text {
   margin: 0 !important;
 }
+.text-transform-none {
+  text-transform: none !important;
+}

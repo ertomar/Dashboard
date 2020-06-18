@@ -50,11 +50,8 @@ export class OffersComponent implements OnInit {
         this.ngOnInit();
       },
       (error: any) => {
-        if (error.status == 400 || error.status == 404 || error.status == 401) {
-          this.notificationComponent.showNotification(error.error);
-        } else {
-          this.notificationComponent.showNotification(error.error);
-        }
+        this.notificationComponent.showNotification(error.error);
+
         console.clear();
       }
     );
@@ -74,18 +71,14 @@ export class OffersComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${offer.title} offer?`)) {
       this._OffersService.deleteOffer(offer._id).subscribe(
         (response) => {
+          this.pastOffers = null;
+          this.activeOffers = null;
+          this.expiredOffers = null;
           this.getOffers();
         },
         (error: any) => {
-          if (
-            error.status == 400 ||
-            error.status == 401 ||
-            error.status == 404
-          ) {
-            this.notificationComponent.showNotification(error.error);
-          } else {
-            this.notificationComponent.showNotification(error.error);
-          }
+          this.notificationComponent.showNotification(error.error);
+
           console.clear();
         }
       );
@@ -106,6 +99,7 @@ export class OffersComponent implements OnInit {
         dataRows: offers,
         title: "Past Offers",
         buttonName: "Delete",
+        searchField: "code",
       };
       this.activeOffers = Object.assign({}, this.pastOffers);
       this.activeOffers.title = "Active Offers";

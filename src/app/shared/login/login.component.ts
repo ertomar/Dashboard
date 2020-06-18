@@ -24,13 +24,8 @@ export class LoginComponent implements OnInit {
     this._LoginService.loginUser(this.email, this.password).subscribe(
       (response: any) => {},
       (error: any) => {
-        if (error.status == 400 || error.status == 404 || error.status == 401) {
-          this.notificationComponent.showNotification(error.error);
-        } else {
-          this.notificationComponent.showNotification(
-            "Please, try again later."
-          );
-        }
+        this.notificationComponent.showNotification("Please, try again later.");
+
         //console.clear();
       }
     );

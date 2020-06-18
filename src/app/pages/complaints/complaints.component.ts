@@ -35,6 +35,7 @@ export class ComplaintsComponent implements OnInit {
         dataRows: complaints,
         title: "Complaints",
         buttonName: "Details",
+        searchField: "code",
       };
 
       this.complaintsTable = Object.assign({}, this.complaints);

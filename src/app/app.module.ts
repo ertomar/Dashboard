@@ -46,6 +46,7 @@ import { MapsComponent } from "./pages/maps/maps.component";
 import { LinesComponent } from "./pages/lines/lines.component";
 import { from } from "rxjs";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
+import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { NotificationsComponent } from "./pages/notifications/notifications.comp
     MapsComponent,
     LinesComponent,
     NotificationsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserAnimationsModule,
