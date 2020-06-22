@@ -23,4 +23,13 @@ export class LinesService {
       { responseType: "text" }
     );
   }
+  public addLine(line): Observable<any> {
+    return this._HttpClient.post(
+      "http://localhost:3000/api/admin/lines/add",
+      {
+        line,
+      },
+      { responseType: "text" }
+    );
+  }
 }

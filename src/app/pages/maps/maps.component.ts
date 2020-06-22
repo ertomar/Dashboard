@@ -205,7 +205,7 @@ export class MapsComponent implements OnInit {
       fillColor: "white",
       fillOpacity: 0.8,
       scale: 1,
-      strokeColor: "#4285f4",
+      strokeColor: "#673ab7",
       strokeWeight: 14,
     };
 

@@ -1,11 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Offer } from "../../classes/offer";
 import { OffersService } from "app/services/offers.service";
-import { MessageComponent } from "app/shared/message/message.component";
-import { MatDialog } from "@angular/material/dialog";
 import { TableData } from "app/interfaces/table-data";
 import { NotificationsComponent } from "../notifications/notifications.component";
-
+import * as moment from "moment";
 @Component({
   selector: "app-offers",
   templateUrl: "./offers.component.html",
@@ -36,15 +34,26 @@ export class OffersComponent implements OnInit {
   }
 
   onSubmit() {
-    this.offer.start = this.dayZeroing(this.offer.start);
-    this.offer.end = this.dayZeroing(this.offer.end);
-    this.submitted = true;
+    try {
+      let startDate = this.offer.start as any;
+      let endDate = this.offer.end as any;
+      startDate = startDate._d;
+      endDate = endDate._d;
+      this.offer.start = this.dayZeroing(startDate);
+      this.offer.end = this.dayZeroing(endDate);
+      this.submitted = true;
+    } catch {
+      this.offer.start = this.dayZeroing(this.offer.start);
+      this.offer.end = this.dayZeroing(this.offer.end);
+      this.submitted = true;
+    }
   }
   confirm() {
     this._OffersService.addOffer(this.offer).subscribe(
-      (response: any) => {
+      () => {
         this.notificationComponent.showNotification("Offer has been added.");
         this.submitted = false;
+
         this.newOffer();
         this.getOffers();
         this.ngOnInit();
@@ -70,10 +79,7 @@ export class OffersComponent implements OnInit {
     let offer = this.pastOffers.dataRows[index];
     if (confirm(`Are you sure you want to delete ${offer.title} offer?`)) {
       this._OffersService.deleteOffer(offer._id).subscribe(
-        (response) => {
-          this.pastOffers = null;
-          this.activeOffers = null;
-          this.expiredOffers = null;
+        () => {
           this.getOffers();
         },
         (error: any) => {
@@ -85,6 +91,9 @@ export class OffersComponent implements OnInit {
     }
   }
   getOffers() {
+    this.pastOffers = null;
+    this.activeOffers = null;
+    this.expiredOffers = null;
     this._OffersService.getOffers().subscribe((offers) => {
       this.pastOffers = {
         headerRow: [

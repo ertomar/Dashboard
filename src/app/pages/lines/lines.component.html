@@ -1,5 +1,210 @@
-<table-cmp
-  *ngIf="linesTable"
-  [data]="linesTable"
-  (clicked)="deleteClicked($event)"
-></table-cmp>
+<mat-tab-group>
+  <mat-tab label="Add Lines">
+    <div class="container mt-4">
+      <div [hidden]="submitted">
+        <h1>Add a line</h1>
+        <form (ngSubmit)="onSubmit()" #lineForm="ngForm">
+          <div class="form-group">
+            <label for="from">From</label>
+            <input
+              type="text"
+              class="form-control"
+              id="from"
+              required
+              [(ngModel)]="line.from"
+              name="from"
+              #from="ngModel"
+              minlength="3"
+              maxlength="30"
+            />
+            <div
+              [hidden]="from.valid || from.pristine"
+              class="alert alert-danger"
+            >
+              -must be between 3 and 30 characters.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="to">To</label>
+            <input
+              type="text"
+              class="form-control"
+              id="to"
+              required
+              [(ngModel)]="line.to"
+              name="to"
+              #to="ngModel"
+              minlength="3"
+              maxlength="30"
+            />
+            <div [hidden]="to.valid || to.pristine" class="alert alert-danger">
+              -must be between 3 and 30 characters.
+              <br />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cost">Cost</label>
+            <input
+              type="number"
+              class="form-control"
+              id="cost"
+              required
+              [(ngModel)]="line.cost"
+              name="cost"
+              #cost="ngModel"
+              min="0"
+              oninput="this.cost = Math.abs(this.cost)"
+            />
+            <div
+              [hidden]="cost.valid || cost.pristine"
+              class="alert alert-danger"
+            >
+              -must be higher than 0.
+            </div>
+          </div>
+          <form (ngSubmit)="onSubmitStation()" #stationForm="ngForm">
+            <div class="d-flex flex-row justify-content-between">
+              <div class="form-group w-20">
+                <label for="stationName">Station Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="stationName"
+                  required
+                  minlength="3"
+                  maxlength="50"
+                  [(ngModel)]="station.name"
+                  name="name"
+                  #name="ngModel"
+                />
+                <div
+                  [hidden]="name.valid || name.pristine"
+                  class="alert alert-danger w-100"
+                >
+                  -must be between 3 and 50 characters.
+                </div>
+              </div>
+              <div class="form-group w-20">
+                <label for="stationLat">Station Latitude</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="stationLat"
+                  required
+                  [(ngModel)]="station.lat"
+                  name="lat"
+                  #lat="ngModel"
+                  disabled
+                />
+              </div>
+              <div class="form-group w-20">
+                <label for="stationLng">Station Longitude</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="stationLng"
+                  required
+                  [(ngModel)]="station.lng"
+                  name="lng"
+                  #lng="ngModel"
+                  disabled
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-success add-btn"
+                [disabled]="!stationForm.form.valid"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+
+          <div id="map" class="map" #map></div>
+          <div class="stations mt-4">
+            <label for="stationsList" class="font-weight-bolder"
+              >Stations ordered by nearest to the (From) location:</label
+            >
+            <ul class="list-group" id="stationsList">
+              <li
+                class="list-group-item w-50 m-auto main-color d-flex justify-content-md-between"
+                *ngFor="let station of stations; let i = index"
+              >
+                <span class="main-color font-weight-bolder">{{
+                  station.name
+                }}</span>
+
+                <span class="delete-btn" (click)="deleteStation(i)"
+                  ><i class="fa fa-trash"></i
+                ></span>
+              </li>
+            </ul>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!lineForm.form.valid"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            class="btn btn-default"
+            (click)="lineForm.reset(); stationForm.reset(); clearStations()"
+          >
+            Clear
+          </button>
+        </form>
+      </div>
+
+      <div [hidden]="!submitted">
+        <h2>You submitted the following:</h2>
+        <div class="d-flex flex-column">
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1 main-color">From:</div>
+            <div class="col-xs-9">{{ line.from }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1 main-color">To:</div>
+            <div class="col-xs-9">{{ line.to }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1 main-color">Cost:</div>
+            <div class="col-xs-9">{{ line.cost }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 font-weight-bold mr-1 main-color">
+              Stations:
+            </div>
+            <ol>
+              <li *ngFor="let station of stations">
+                {{ station.name }}
+              </li>
+            </ol>
+          </div>
+          <br />
+          <div
+            class="d-flex flex-row justify-content-center align-items-center align-content-center"
+          >
+            <button class="btn btn-primary" (click)="confirm()">
+              Confirm
+            </button>
+            <button class="btn btn-default" (click)="submitted = false">
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Lines">
+    <table-cmp
+      *ngIf="linesTable"
+      [data]="linesTable"
+      (clicked)="deleteClicked($event)"
+    ></table-cmp>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,29 @@
+.row {
+  margin: 0 !important;
+}
+.map {
+  height: 300px;
+  width: 80%;
+  margin: auto;
+}
+.w-20 {
+  width: 20%;
+}
+.add-btn {
+  max-height: 50px;
+}
+#stationList li {
+  font-size: 18px;
+}
+#stationsList .delete-btn {
+  cursor: pointer;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #dc3545; /* red */
+}
