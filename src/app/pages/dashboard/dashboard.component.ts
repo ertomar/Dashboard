@@ -17,6 +17,34 @@ export class DashboardComponent implements OnInit {
   public chartEmail;
   public chartHours;
   public chartLines;
+  public colors;
+  governColors;
+  Colors = {
+    random: function (n: number) {
+      return this.names.slice(0, n);
+    },
+    names: [
+      "#007bff",
+      "#6610f2",
+      "#e83e8c",
+      "#fd7e14",
+      "#20c997",
+      "#ffc107",
+      "#44CC00",
+      "#B5E39E",
+      "#5509A1",
+      "#A14EF5",
+      "#FF1111",
+      "#ECFF00",
+      "#F559C5",
+      "#ff5489",
+      "#fc005d",
+      "#d80051",
+      "#b50045",
+      "#93003a",
+    ],
+  };
+  currentYear: number = new Date().getFullYear();
 
   public data = {
     usersCount: Array<number>(12).fill(0),
@@ -44,7 +72,6 @@ export class DashboardComponent implements OnInit {
 
   getStatistics() {
     this._StatisticsService.getStatistics().subscribe((statistics) => {
-      console.log(statistics);
       statistics.usersActivity.usersNumber.forEach((element) => {
         this.data.usersCount[element.month - 1] = element.count;
       });
@@ -190,14 +217,7 @@ export class DashboardComponent implements OnInit {
             label: "Emails",
             pointRadius: 0,
             pointHoverRadius: 0,
-            backgroundColor: [
-              "#4acccd",
-              "#fcc468",
-              "#f1678b",
-              "#ef80ff",
-              "#fd9d78",
-              "#7ffe8b",
-            ],
+            backgroundColor: this.generateColors(this.data.governsCount.length),
             borderWidth: 0,
             data: this.data.governsCount,
           },
@@ -297,6 +317,16 @@ export class DashboardComponent implements OnInit {
         display: false,
         position: "top",
       },
+      scales: {
+        yAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: "Egyptian Pound",
+            },
+          },
+        ],
+      },
     };
 
     this.chartLines = new Chart(speedCanvas, {
@@ -305,5 +335,9 @@ export class DashboardComponent implements OnInit {
       data: speedData,
       options: chartOptions,
     });
+  }
+  generateColors(n: number) {
+    this.governColors = this.Colors.random(n);
+    return this.governColors;
   }
 }

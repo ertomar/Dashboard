@@ -3,7 +3,7 @@ import { Offer } from "../../classes/offer";
 import { OffersService } from "app/services/offers.service";
 import { TableData } from "app/interfaces/table-data";
 import { NotificationsComponent } from "../notifications/notifications.component";
-import * as moment from "moment";
+
 @Component({
   selector: "app-offers",
   templateUrl: "./offers.component.html",

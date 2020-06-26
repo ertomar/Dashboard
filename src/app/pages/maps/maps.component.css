@@ -31,3 +31,8 @@
 button {
   color: #673ab7;
 }
+.driver-name {
+  color: #673ab7;
+  font-size: 20px;
+  font-weight: 800;
+}

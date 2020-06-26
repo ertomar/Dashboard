@@ -111,7 +111,7 @@ export class LinesComponent implements OnInit {
       name: this.station.name,
       type: "Point",
     };
-    console.log(stationCopy);
+   
     this.stations.push(stationCopy);
 
     this.station = {
@@ -119,7 +119,7 @@ export class LinesComponent implements OnInit {
       lng: 0,
       name: "",
     };
-    console.log(this.stations);
+    
   }
   @ViewChild("map") mapView: ElementRef;
   InitiateMap() {

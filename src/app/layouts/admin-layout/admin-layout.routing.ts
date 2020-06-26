@@ -8,6 +8,8 @@ import { ComplaintDetailsComponent } from "app/pages/complaint-details/complaint
 import { MapsComponent } from "../../pages/maps/maps.component";
 import { UserComponent } from "app/pages/user/user.component";
 import { LinesComponent } from "app/pages/lines/lines.component";
+import { DriversComponent } from "app/pages/drivers/drivers.component";
+import { DriverDetailsComponent } from "app/pages/driver-details/driver-details.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -18,4 +20,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "complaints/:id", component: ComplaintDetailsComponent },
   { path: "maps", component: MapsComponent },
   { path: "lines", component: LinesComponent },
+  { path: "drivers", component: DriversComponent },
+  { path: "drivers/:id", component: DriverDetailsComponent },
 ];

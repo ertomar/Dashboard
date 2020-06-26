@@ -1,0 +1,168 @@
+<div class="row" *ngIf="driver">
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="image">
+        <img src="assets/img/Passenger.png" alt="..." />
+      </div>
+      <div class="card-body">
+        <div class="author">
+          <a href="#">
+            <img class="avatar border-gray" mat-card-image [src]="profilePic" />
+            <h5 class="title">
+              {{ driver.name.first }} {{ driver.name.last }}
+            </h5>
+          </a>
+        </div>
+        <div>
+          <p
+            class="description text-center"
+            [ngClass]="driver.is_verified ? 'text-success' : 'text-danger'"
+          >
+            {{
+              driver.is_verified
+                ? "Driver is verified."
+                : "Driver is not verified."
+            }}
+          </p>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+          <p class="description text-center mr-2">Phone: {{ driver.phone }}</p>
+          <span class="text-success" *ngIf="driver.phone_verified">
+            <small>(Active)</small>
+          </span>
+          <span class="text-danger" *ngIf="!driver.phone_verified">
+            <small>(Inactive)</small>
+          </span>
+        </div>
+        <div>
+          <p class="description text-center">Govern: {{ driver.govern }}</p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <hr />
+        <div class="button-container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-6 ml-auto">
+              <h5>
+                {{ driver.rate }}
+                <br />
+                <small>Rate</small>
+              </h5>
+            </div>
+            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+              <h5>
+                {{ driver._tours.length }}
+                <br />
+                <small>Trips</small>
+              </h5>
+            </div>
+            <div class="col-lg-3 mr-auto p-0">
+              <h5>
+                {{ driver.balance }}$
+                <br />
+                <small>Balance</small>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Family Members</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled team-members">
+          <li *ngFor="let member of passenger._family; let i = index">
+            <div class="row">
+              <div class="col-md-2 col-2">
+                <div class="avatar">
+                  <img
+                    src="assets/img/mike.jpg"
+                    alt="Circle Image"
+                    class="img-circle img-no-padding img-responsive"
+                  />
+                </div>
+              </div>
+              <div class="col-md-7 col-7">
+                {{ member.name.first }} {{ member.name.last }}
+                <br />
+                <span class="text-success">
+                  <small>Active</small>
+                </span>
+              </div>
+              <div class="col-md-3 col-3 text-right">
+                <button
+                  (click)="redirectToFamilyMember(member._id)"
+                  class="btn btn-sm btn-outline-success btn-round btn-icon"
+                >
+                  <i class="fa fa-user"></i>
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+  <div class="col-md-8">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title main-color font-weight-bolder img-header">
+          Criminal Record
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="w-75 m-auto">
+              <img class="img-fluid m-auto" [src]="criminalRecord" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-header">
+        <h5 class="card-title main-color font-weight-bolder img-header">
+          Driver License
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="w-75 m-auto">
+              <img class="img-fluid m-auto" [src]="driverLicense" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <form>
+        <div class="row">
+          <div class="update ml-auto mr-auto">
+            <button
+              type="submit"
+              class="btn btn-primary btn-round"
+              (click)="respond(true)"
+            >
+              Accept
+            </button>
+            <button
+              type="submit"
+              class="btn btn-debug btn-round"
+              (click)="respond(false)"
+            >
+              Reject
+            </button>
+            <button
+              type="submit"
+              class="btn btn-danger btn-round"
+              (click)="deleteClicked()"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

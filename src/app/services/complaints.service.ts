@@ -18,7 +18,7 @@ export class ComplaintsService {
   }
   public getComplaints(): Observable<any> {
     let complaints = this._HttpClient.get(
-      "http://localhost:3000/api/admin/complaints"
+      "https://www.clax-egyp.me/api/admin/complaints"
     );
     return complaints;
   }

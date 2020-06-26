@@ -47,7 +47,6 @@ export class UserComponent implements OnInit {
   ) {}
   id: string;
   passenger: any;
-  response: string = "";
   getPassenger() {
     this.activatedRoute.params.subscribe((params) => {
       this.id = atob(params["id"]);

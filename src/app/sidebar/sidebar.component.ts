@@ -24,6 +24,12 @@ export const ROUTES: RouteInfo[] = [
     icon: "fa fa-road",
     class: "",
   },
+  {
+    path: "drivers",
+    title: "Drivers",
+    icon: "fa fa-id-card-o",
+    class: "",
+  },
 ];
 
 @Component({

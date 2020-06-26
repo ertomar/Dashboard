@@ -33,7 +33,7 @@ export class MapsComponent implements OnInit {
   selectedDriver: Driver;
   private subscription: Subscription;
   drivers = [];
-  driversIds = [];
+  toursIds = [];
   constructor(
     db: AngularFireDatabase,
     private _formBuilder: FormBuilder,
@@ -49,7 +49,7 @@ export class MapsComponent implements OnInit {
   }
   getIndex(lines: any) {
     for (let i = 0; i < lines.length; i++) {
-      if (Object.keys(lines[i]).indexOf(this.selectedDriver.id) != -1) {
+      if (Object.keys(lines[i]).indexOf(this.selectedDriver.tourId) != -1) {
         return i;
       }
     }
@@ -63,13 +63,13 @@ export class MapsComponent implements OnInit {
             let index = this.getIndex(item);
             if (index != -1) {
               this.addMarker({
-                lng: item[index][this.selectedDriver.id].loc.lng,
-                lat: item[index][this.selectedDriver.id].loc.lat,
+                lng: item[index][this.selectedDriver.tourId].loc.lng,
+                lat: item[index][this.selectedDriver.tourId].loc.lat,
               });
 
               resolve({
-                lng: item[index][this.selectedDriver.id].loc.lng,
-                lat: item[index][this.selectedDriver.id].loc.lat,
+                lng: item[index][this.selectedDriver.tourId].loc.lng,
+                lat: item[index][this.selectedDriver.tourId].loc.lat,
               });
             } else {
               reject(false);
@@ -85,28 +85,28 @@ export class MapsComponent implements OnInit {
   getDriversIds(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.drivers = [];
-      this.driversIds = [];
+      this.toursIds = [];
       this.subscription = this.items.subscribe((lines) => {
         lines.forEach((line) => {
           for (let key in line) {
-            //this.drivers.push(new Driver(key, "aa"));
-            this.driversIds.push(key);
+            this.toursIds.push(key);
           }
         });
 
-        this._DriversService
-          .getDriversNames(this.driversIds)
-          .subscribe((res) => {
-            res.forEach((element) => {
+        this._DriversService.getDriversNames(this.toursIds).subscribe((res) => {
+          res.forEach((element) => {
+            if (element._driver) {
               this.drivers.push(
                 new Driver(
-                  element._id,
-                  `${element.name.first} ${element.name.last}`
+                  element._driver._id,
+                  `${element._driver.name.first} ${element._driver.name.last}`,
+                  element._id
                 )
               );
-            });
-            resolve(true);
+            }
           });
+          resolve(true);
+        });
       });
     });
   }

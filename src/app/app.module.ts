@@ -39,14 +39,16 @@ import { DatePipe } from "@angular/common";
 import { ComplaintsComponent } from "./pages/complaints/complaints.component";
 import { ComplaintDetailsComponent } from "./pages/complaint-details/complaint-details.component";
 import { MailVerficationComponent } from "./pages/mail-verfication/mail-verfication.component";
-import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
+
 import { MatStepperModule } from "@angular/material/stepper";
 import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 import { MapsComponent } from "./pages/maps/maps.component";
 import { LinesComponent } from "./pages/lines/lines.component";
 import { from } from "rxjs";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
-import { UsersComponent } from './pages/users/users.component';
+import { UsersComponent } from "./pages/users/users.component";
+import { DriversComponent } from './pages/drivers/drivers.component';
+import { DriverDetailsComponent } from './pages/driver-details/driver-details.component';
 
 @NgModule({
   declarations: [
@@ -60,11 +62,12 @@ import { UsersComponent } from './pages/users/users.component';
     ComplaintsComponent,
     ComplaintDetailsComponent,
     MailVerficationComponent,
-    ResetPasswordComponent,
     MapsComponent,
     LinesComponent,
     NotificationsComponent,
     UsersComponent,
+    DriversComponent,
+    DriverDetailsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

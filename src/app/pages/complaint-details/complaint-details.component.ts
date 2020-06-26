@@ -43,10 +43,15 @@ export class ComplaintDetailsComponent implements OnInit {
       this.id = atob(params["id"]);
       this._ComplaintsService.getComplaint(this.id).subscribe((response) => {
         this.complaint = response;
-        let bufferImg = response._trip._driver.profilePic.data;
-        this.imageurl = this.domSanitizer.bypassSecurityTrustUrl(
-          "data:image/jpeg;base64," + bufferImg
-        );
+        try {
+          let bufferImg = response._trip._driver.profilePic.data;
+
+          this.imageurl = this.domSanitizer.bypassSecurityTrustUrl(
+            "data:image/jpeg;base64," + bufferImg
+          );
+        } catch (error) {
+          this.imageurl = "assets/img/default-avatar.png";
+        }
       });
     });
   }

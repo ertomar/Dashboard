@@ -1,0 +1,16 @@
+<mat-tab-group>
+  <mat-tab label="Applications"
+    ><table-cmp
+      *ngIf="applications"
+      [data]="applications"
+      (clicked)="detailsClickedApp($event)"
+    ></table-cmp>
+  </mat-tab>
+  <mat-tab label="Drivers"
+    ><table-cmp
+      *ngIf="currentDrivers"
+      [data]="currentDrivers"
+      (clicked)="detailsClickedDrivers($event)"
+    ></table-cmp>
+  </mat-tab>
+</mat-tab-group>
