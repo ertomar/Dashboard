@@ -41,17 +41,25 @@ export class ComplaintsComponent implements OnInit {
       this.complaintsTable = Object.assign({}, this.complaints);
       this.complaintsTable.dataRows.forEach((element) => {
         try {
+          element._passenger =
+            element._passenger.name.first + " " + element._passenger.name.last;
           element.from_passenger = element.from_passenger
             ? "Passenger"
             : "Driver";
-          element.driver =
-            element._trip._tour._driver.name.first +
-            " " +
-            element._trip._tour._driver.name.last;
-          element._trip =
-            element._trip._tour._line.from + "-" + element._trip._tour._line.to;
-          element._passenger =
-            element._passenger.name.first + " " + element._passenger.name.last;
+          if (element._trip) {
+            element.driver =
+              element._trip._tour._driver.name.first +
+              " " +
+              element._trip._tour._driver.name.last;
+            element._trip =
+              element._trip._tour._line.from +
+              "-" +
+              element._trip._tour._line.to;
+          } else {
+            element.driver = "none";
+            element._trip = "none";
+          }
+
           element.from_passenger == true ? "Passenger" : "Driver";
         } catch (error) {
           console.log(error);

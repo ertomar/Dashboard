@@ -36,16 +36,29 @@ export class OffersComponent implements OnInit {
   onSubmit() {
     try {
       let startDate = this.offer.start as any;
-      let endDate = this.offer.end as any;
+
       startDate = startDate._d;
-      endDate = endDate._d;
+
       this.offer.start = this.dayZeroing(startDate);
-      this.offer.end = this.dayZeroing(endDate);
-      this.submitted = true;
     } catch {
       this.offer.start = this.dayZeroing(this.offer.start);
+    }
+    try {
+      let endDate = this.offer.end as any;
+
+      endDate = endDate._d;
+
+      this.offer.end = this.dayZeroing(endDate);
+    } catch {
       this.offer.end = this.dayZeroing(this.offer.end);
+    }
+    if (this.offer.end.getTime() >= this.offer.start.getTime()) {
       this.submitted = true;
+    } else {
+      this.submitted = false;
+      this.notificationComponent.showNotification(
+        "The start date should be earlier than end date."
+      );
     }
   }
   confirm() {
