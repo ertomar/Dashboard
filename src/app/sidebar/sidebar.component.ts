@@ -9,27 +9,28 @@ export interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   { path: "dashboard", title: "Statistics", icon: "nc-bank", class: "" },
-  { path: "offers", title: "Offers", icon: "nc-diamond", class: "" },
   { path: "passengers", title: "Passengers", icon: "nc-single-02", class: "" },
-  { path: "maps", title: "Track Driver", icon: "nc-pin-3", class: "" },
-  {
-    path: "complaints",
-    title: "Complaints",
-    icon: "fa fa-comment-o",
-    class: "",
-  },
-  {
-    path: "lines",
-    title: "Lines",
-    icon: "fa fa-road",
-    class: "",
-  },
   {
     path: "drivers",
     title: "Drivers",
     icon: "fa fa-id-card-o",
     class: "",
   },
+  { path: "offers", title: "Offers", icon: "nc-diamond", class: "" },
+  {
+    path: "complaints",
+    title: "Complaints",
+    icon: "fa fa-comment-o",
+    class: "",
+  },
+
+  {
+    path: "lines",
+    title: "Lines",
+    icon: "fa fa-road",
+    class: "",
+  },
+  { path: "maps", title: "Track Driver", icon: "nc-pin-3", class: "" },
 ];
 
 @Component({

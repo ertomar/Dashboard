@@ -48,16 +48,18 @@ export class DriverDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.id = atob(params["id"]);
       this._DriversService.getDriver(this.id).subscribe((response) => {
+        console.log(response);
         this.driver = response;
-        let bufferImg = response.profilePic.data;
+        let bufferImg = atob(response.profilePic.data);
+
         this.profilePic = this.domSanitizer.bypassSecurityTrustUrl(
           "data:image/jpeg;base64," + bufferImg
         );
-        bufferImg = response.criminalRecord.data;
+        bufferImg = atob(response.criminalRecord.data);
         this.criminalRecord = this.domSanitizer.bypassSecurityTrustUrl(
           "data:image/jpeg;base64," + bufferImg
         );
-        bufferImg = response.license.data;
+        bufferImg = atob(response.license.data);
         this.driverLicense = this.domSanitizer.bypassSecurityTrustUrl(
           "data:image/jpeg;base64," + bufferImg
         );
